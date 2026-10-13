@@ -1,0 +1,9 @@
+<resources>
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowSplashScreenBackground">#FFF8FA</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/pookie_paw</item>
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#FFF8FA</item>
+    </style>
+</resources>

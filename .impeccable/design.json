@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T10:37:36.229621+00:00",
+  "title": "Design System: Pookie Prep",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Warm Ground",
+        "tonalRamp": [
+          "oklch(15.00% 0.00790 357.79)",
+          "oklch(26.43% 0.00790 357.79)",
+          "oklch(37.86% 0.00790 357.79)",
+          "oklch(49.29% 0.00790 357.79)",
+          "oklch(60.71% 0.00790 357.79)",
+          "oklch(72.14% 0.00790 357.79)",
+          "oklch(83.57% 0.00790 357.79)",
+          "oklch(95.00% 0.00790 357.79)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Reading Paper",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "blush": {
+        "role": "primary",
+        "displayName": "Blush",
+        "tonalRamp": [
+          "oklch(15.00% 0.02766 351.94)",
+          "oklch(26.43% 0.02766 351.94)",
+          "oklch(37.86% 0.02766 351.94)",
+          "oklch(49.29% 0.02766 351.94)",
+          "oklch(60.71% 0.02766 351.94)",
+          "oklch(72.14% 0.02766 351.94)",
+          "oklch(83.57% 0.02766 351.94)",
+          "oklch(95.00% 0.02766 351.94)"
+        ]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Companion Pink",
+        "tonalRamp": [
+          "oklch(15.00% 0.12277 357.92)",
+          "oklch(26.43% 0.12277 357.92)",
+          "oklch(37.86% 0.12277 357.92)",
+          "oklch(49.29% 0.12277 357.92)",
+          "oklch(60.71% 0.12277 357.92)",
+          "oklch(72.14% 0.12277 357.92)",
+          "oklch(83.57% 0.12277 357.92)",
+          "oklch(95.00% 0.12277 357.92)"
+        ]
+      },
+      "primary-deep": {
+        "role": "primary",
+        "displayName": "Action Rose",
+        "tonalRamp": [
+          "oklch(15.00% 0.20101 5.25)",
+          "oklch(26.43% 0.20101 5.25)",
+          "oklch(37.86% 0.20101 5.25)",
+          "oklch(49.29% 0.20101 5.25)",
+          "oklch(60.71% 0.20101 5.25)",
+          "oklch(72.14% 0.20101 5.25)",
+          "oklch(83.57% 0.20101 5.25)",
+          "oklch(95.00% 0.20101 5.25)"
+        ]
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Study Violet",
+        "tonalRamp": [
+          "oklch(15.00% 0.12619 300.38)",
+          "oklch(26.43% 0.12619 300.38)",
+          "oklch(37.86% 0.12619 300.38)",
+          "oklch(49.29% 0.12619 300.38)",
+          "oklch(60.71% 0.12619 300.38)",
+          "oklch(72.14% 0.12619 300.38)",
+          "oklch(83.57% 0.12619 300.38)",
+          "oklch(95.00% 0.12619 300.38)"
+        ]
+      },
+      "mint": {
+        "role": "tertiary",
+        "displayName": "Mint",
+        "tonalRamp": [
+          "oklch(15.00% 0.01678 168.50)",
+          "oklch(26.43% 0.01678 168.50)",
+          "oklch(37.86% 0.01678 168.50)",
+          "oklch(49.29% 0.01678 168.50)",
+          "oklch(60.71% 0.01678 168.50)",
+          "oklch(72.14% 0.01678 168.50)",
+          "oklch(83.57% 0.01678 168.50)",
+          "oklch(95.00% 0.01678 168.50)"
+        ]
+      },
+      "lilac": {
+        "role": "secondary",
+        "displayName": "Lilac",
+        "tonalRamp": [
+          "oklch(15.00% 0.02383 304.49)",
+          "oklch(26.43% 0.02383 304.49)",
+          "oklch(37.86% 0.02383 304.49)",
+          "oklch(49.29% 0.02383 304.49)",
+          "oklch(60.71% 0.02383 304.49)",
+          "oklch(72.14% 0.02383 304.49)",
+          "oklch(83.57% 0.02383 304.49)",
+          "oklch(95.00% 0.02383 304.49)"
+        ]
+      },
+      "apricot": {
+        "role": "secondary",
+        "displayName": "Apricot",
+        "tonalRamp": [
+          "oklch(15.00% 0.02718 63.96)",
+          "oklch(26.43% 0.02718 63.96)",
+          "oklch(37.86% 0.02718 63.96)",
+          "oklch(49.29% 0.02718 63.96)",
+          "oklch(60.71% 0.02718 63.96)",
+          "oklch(72.14% 0.02718 63.96)",
+          "oklch(83.57% 0.02718 63.96)",
+          "oklch(95.00% 0.02718 63.96)"
+        ]
+      },
+      "blue-wash": {
+        "role": "secondary",
+        "displayName": "Blue Wash",
+        "tonalRamp": [
+          "oklch(15.00% 0.01540 257.20)",
+          "oklch(26.43% 0.01540 257.20)",
+          "oklch(37.86% 0.01540 257.20)",
+          "oklch(49.29% 0.01540 257.20)",
+          "oklch(60.71% 0.01540 257.20)",
+          "oklch(72.14% 0.01540 257.20)",
+          "oklch(83.57% 0.01540 257.20)",
+          "oklch(95.00% 0.01540 257.20)"
+        ]
+      },
+      "pink-wash": {
+        "role": "primary",
+        "displayName": "Pink Wash",
+        "tonalRamp": [
+          "oklch(15.00% 0.02708 354.51)",
+          "oklch(26.43% 0.02708 354.51)",
+          "oklch(37.86% 0.02708 354.51)",
+          "oklch(49.29% 0.02708 354.51)",
+          "oklch(60.71% 0.02708 354.51)",
+          "oklch(72.14% 0.02708 354.51)",
+          "oklch(83.57% 0.02708 354.51)",
+          "oklch(95.00% 0.02708 354.51)"
+        ]
+      },
+      "ok": {
+        "role": "tertiary",
+        "displayName": "Learning Green",
+        "tonalRamp": [
+          "oklch(15.00% 0.09009 168.51)",
+          "oklch(26.43% 0.09009 168.51)",
+          "oklch(37.86% 0.09009 168.51)",
+          "oklch(49.29% 0.09009 168.51)",
+          "oklch(60.71% 0.09009 168.51)",
+          "oklch(72.14% 0.09009 168.51)",
+          "oklch(83.57% 0.09009 168.51)",
+          "oklch(95.00% 0.09009 168.51)"
+        ]
+      },
+      "wrong": {
+        "role": "tertiary",
+        "displayName": "Correction Rose",
+        "tonalRamp": [
+          "oklch(15.00% 0.14583 18.84)",
+          "oklch(26.43% 0.14583 18.84)",
+          "oklch(37.86% 0.14583 18.84)",
+          "oklch(49.29% 0.14583 18.84)",
+          "oklch(60.71% 0.14583 18.84)",
+          "oklch(72.14% 0.14583 18.84)",
+          "oklch(83.57% 0.14583 18.84)",
+          "oklch(95.00% 0.14583 18.84)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Plum Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.04460 316.57)",
+          "oklch(26.43% 0.04460 316.57)",
+          "oklch(37.86% 0.04460 316.57)",
+          "oklch(49.29% 0.04460 316.57)",
+          "oklch(60.71% 0.04460 316.57)",
+          "oklch(72.14% 0.04460 316.57)",
+          "oklch(83.57% 0.04460 316.57)",
+          "oklch(95.00% 0.04460 316.57)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Plum",
+        "tonalRamp": [
+          "oklch(15.00% 0.03588 322.72)",
+          "oklch(26.43% 0.03588 322.72)",
+          "oklch(37.86% 0.03588 322.72)",
+          "oklch(49.29% 0.03588 322.72)",
+          "oklch(60.71% 0.03588 322.72)",
+          "oklch(72.14% 0.03588 322.72)",
+          "oklch(83.57% 0.03588 322.72)",
+          "oklch(95.00% 0.03588 322.72)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Soft Divider",
+        "tonalRamp": [
+          "oklch(15.00% 0.01787 345.65)",
+          "oklch(26.43% 0.01787 345.65)",
+          "oklch(37.86% 0.01787 345.65)",
+          "oklch(49.29% 0.01787 345.65)",
+          "oklch(60.71% 0.01787 345.65)",
+          "oklch(72.14% 0.01787 345.65)",
+          "oklch(83.57% 0.01787 345.65)",
+          "oklch(95.00% 0.01787 345.65)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "greeting": {
+        "displayName": "Greeting",
+        "purpose": "Personal home greeting."
+      },
+      "title-large": {
+        "displayName": "Title Large",
+        "purpose": "Content titles."
+      },
+      "title-medium": {
+        "displayName": "Title Medium",
+        "purpose": "Study sections."
+      },
+      "title-small": {
+        "displayName": "Title Small",
+        "purpose": "Topic group labels."
+      },
+      "body-large": {
+        "displayName": "Body Large",
+        "purpose": "Emphasized reading and answers."
+      },
+      "body-medium": {
+        "displayName": "Body Medium",
+        "purpose": "Explanations and normal reading."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Supporting metadata."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Primary action labels."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Filter labels."
+      },
+      "navigation-selected": {
+        "displayName": "Navigation Selected",
+        "purpose": "Selected destination label."
+      },
+      "navigation-unselected": {
+        "displayName": "Navigation Unselected",
+        "purpose": "Unselected destination label."
+      }
+    },
+    "shadows": [
+      {
+        "name": "flat-content",
+        "value": "Material elevation 0",
+        "purpose": "Cards and app bars use tonal layering; no custom shadow token."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "160ms",
+        "purpose": "Native filled-button state animation."
+      },
+      {
+        "name": "answer-selection",
+        "value": "180ms Curves.easeOutCubic",
+        "purpose": "State feedback only; zero duration with disableAnimations."
+      },
+      {
+        "name": "completion-confetti",
+        "value": "2500ms, one pass",
+        "purpose": "Results at accuracy >=80%; suppressed and stopped with disableAnimations; ignores pointers."
+      },
+      {
+        "name": "navigation-content",
+        "value": "No decorative animation",
+        "purpose": "Tab and quiz-question changes remain immediate; retain native route/control feedback."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "navigation-rail",
+        "value": "760dp"
+      },
+      {
+        "name": "extended-rail",
+        "value": "1100dp"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Native FilledButton, the main practice action. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<button class=\"ds-primary\">অনুশীলন শুরু করো</button>",
+      "css": ".ds-primary{font-family:HindSiliguri,sans-serif;background:#D6336C;color:#FFFFFF;border:0;border-radius:16px;padding:14px 22px;min-height:54px;font-size:16px;font-weight:600;transition:filter 160ms}.ds-primary:hover{filter:brightness(.97)}.ds-primary:focus-visible{outline:2px solid #7050A0;outline-offset:3px;}.ds-primary:active{filter:brightness(.92)}"
+    },
+    {
+      "name": "Outlined action",
+      "kind": "button",
+      "refersTo": "button-outlined",
+      "description": "Native OutlinedButton for secondary actions. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<button class=\"ds-outline\">আবার অনুশীলন</button>",
+      "css": ".ds-outline{font-family:HindSiliguri,sans-serif;background:transparent;color:#D6336C;border:1px solid #EBDDE4;border-radius:16px;padding:12px 18px;min-height:50px}.ds-outline:hover,.ds-outline:active{background:#FCE5EE}.ds-outline:focus-visible{outline:2px solid #7050A0;outline-offset:3px;}"
+    },
+    {
+      "name": "Selected filter",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Wrapping native FilterChip with check plus color selection. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\" fill=\"none\" stroke=\"#D6336C\" stroke-width=\"2\"/></svg> সব বিষয়</button>",
+      "css": ".ds-chip{font-family:HindSiliguri,sans-serif;display:inline-flex;align-items:center;gap:8px;background:#FCE5EE;color:#35253B;border:1px solid #EBDDE4;border-radius:12px;padding:8px;font-size:14px;line-height:1.5}.ds-chip:hover,.ds-chip:active{filter:brightness(.97)}.ds-chip:focus-visible{outline:2px solid #7050A0;outline-offset:3px;}"
+    },
+    {
+      "name": "Reading panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat, noninteractive white content panel; no hover state is applicable. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<article class=\"ds-panel\"><h3>তোমার সংরক্ষিত প্রশ্ন</h3><p>গুরুত্বপূর্ণ প্রশ্নগুলো আবার পড়ো।</p></article>",
+      "css": ".ds-panel{font-family:HindSiliguri,sans-serif;background:#FFFFFF;color:#35253B;border-radius:16px;padding:16px}.ds-panel h3{margin:0 0 12px;font-size:18px;line-height:1.45;font-weight:600}.ds-panel p{margin:0;font-size:15px;line-height:1.55}"
+    },
+    {
+      "name": "Question report field",
+      "kind": "input",
+      "refersTo": "report-field",
+      "description": "Two-line native TextField; native Material focus is approximated in this preview. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<label class=\"ds-field-label\">তোমার মন্তব্য<textarea class=\"ds-field\" rows=\"2\" placeholder=\"তোমার মন্তব্য বা সংশোধন...\"></textarea></label>",
+      "css": ".ds-field-label{font-family:HindSiliguri,sans-serif;color:#35253B}.ds-field{font-family:HindSiliguri,sans-serif;display:block;background:rgba(252,229,238,.5);color:#35253B;border:1px solid #756477;border-radius:16px;padding:16px;font-size:15px;line-height:1.55}.ds-field:hover{border-color:#35253B}.ds-field:focus-visible{outline:2px solid #D6336C;outline-offset:0}"
+    },
+    {
+      "name": "Study navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Compact label-only preview of navigation states; the native bar/rail includes icons. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"প্রধান\"><button aria-current=\"page\">হোম</button><button>অনুশীলন</button><button>ভুল খাতা</button><button>সংবাদ</button><button>অগ্রগতি</button></nav>",
+      "css": ".ds-nav{display:flex;gap:8px;background:#FFFFFF;min-height:80px;align-items:center;border-top:1px solid #EBDDE4}.ds-nav button{font-family:HindSiliguri,sans-serif;color:#756477;background:transparent;border:0;border-radius:16px;min-height:48px;padding:8px;font-size:12px}.ds-nav button[aria-current]{background:#FCE5EE;color:#D6336C;font-weight:600}.ds-nav button:hover,.ds-nav button:active{background:#FCE5EE}.ds-nav button:focus-visible{outline:2px solid #7050A0;outline-offset:3px;}"
+    },
+    {
+      "name": "Selected answer",
+      "kind": "custom",
+      "refersTo": "answer-selected",
+      "description": "Immediate answer selection with a letter marker, rose border, and check icon. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<button class=\"ds-answer\" aria-pressed=\"true\"><span>ক</span> সঠিক উত্তর বেছে নাও <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#D6336C\"/><path d=\"m7 12 3 3 7-7\" fill=\"none\" stroke=\"white\" stroke-width=\"2\"/></svg></button>",
+      "css": ".ds-answer{font-family:HindSiliguri,sans-serif;display:flex;align-items:center;gap:14px;text-align:left;background:#FCE5EE;color:#35253B;border:1.5px solid #D6336C;border-radius:16px;padding:16px;font-size:16px;line-height:1.55;font-weight:500;transition:background 180ms cubic-bezier(.215,.61,.355,1)}.ds-answer span{display:grid;place-items:center;min-width:34px;height:34px;background:#D6336C;color:white;border-radius:11px;font-weight:600}.ds-answer:hover,.ds-answer:active{filter:brightness(.98)}.ds-answer:focus-visible{outline:2px solid #7050A0;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-answer{transition:none}}"
+    },
+    {
+      "name": "Companion introduction",
+      "kind": "custom",
+      "refersTo": "intro",
+      "description": "StudyIntro uses a puppy or semantic icon in Flutter; this text-only preview omits the asset. Browser-only illustrative translation; Flutter dp/sp, native text scaling, and Material state behavior remain authoritative.",
+      "html": "<section class=\"ds-intro\"><h3>আবার পড়ার জন্য রাখা</h3><p>উত্তর দেখে রিভিশন দাও, অথবা নিজেকে যাচাই করো।</p></section>",
+      "css": ".ds-intro{font-family:HindSiliguri,sans-serif;background:#FFE8F0;color:#35253B;border-radius:16px;padding:20px}.ds-intro h3{margin:0 0 10px;font-size:22px;line-height:1.4;font-weight:600}.ds-intro p{margin:0;font-size:15px;line-height:1.55}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Playful companion",
+    "overview": "A friendly companion's study corner: warm pink surroundings, white reading paper, plum ink, and the expressive white puppy. The user selected a softer, more colorful direction while preserving the Bengali, pink, and puppy identity. Pastel introductions make each area welcoming; readable content remains calm enough for timed practice.\n\nThis is a code-led record of the implemented Flutter Android interface, informed by the user-pinned direction in `.impeccable/direction.md`. No approved visual comp exists. Native dimensions use logical pixels (dp) and scalable type (sp); these strings preserve native intent rather than defining CSS. The implementation uses a fixed light scheme. Dark mode is not implemented. Source authority is `lib/core/theme.dart`, `lib/core/study_widgets.dart`, `lib/core/page.dart`, and the feature screens; built-in Material 3 defaults supply styles that are not explicitly overridden.",
+    "keyCharacteristics": [
+      "Bengali-first bundled HindSiliguri type.",
+      "Pink identity, white puppy, and distinct pastel study areas.",
+      "Flat reading surfaces with gently rounded controls.",
+      "Immediate practice feedback and completion-only celebration.",
+      "Safe insets, readable width, and adaptive native navigation."
+    ],
+    "rules": [
+      {
+        "name": "The Meaningful State Rule",
+        "body": "Pair correctness, selection, bookmark, and review colors with explicit icons or text; color alone must not carry the meaning.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bengali Reading Rule",
+        "body": "Let text wrap and grow with system text scaling. Do not shrink Bengali copy to keep a decorative panel or fixed row intact.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Keep reading content flat; reserve tonal contrast and borders for hierarchy and meaningful state.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve Bengali copy, the bundled HindSiliguri family, pink identity, and white puppy.",
+      "**Do** use safe insets, the 840dp reading cap, adaptive navigation, and controls of at least 48dp.",
+      "**Do** keep white reading surfaces quiet and allow Bengali text to wrap at enlarged system text sizes.",
+      "**Do** pair state colors with meaningful labels or icons and respect reduced-motion settings."
+    ],
+    "donts": [
+      "**Don't** claim dark-mode support or introduce a second visual identity without a new direction decision.",
+      "**Don't** add decorative animation to tab changes or quiz-question navigation.",
+      "**Don't** make mascot decoration crowd timed practice, delay answers, or obscure exam feedback.",
+      "**Don't** treat the sidecar's browser previews as Flutter source or normative CSS tokens."
+    ]
+  }
+}
