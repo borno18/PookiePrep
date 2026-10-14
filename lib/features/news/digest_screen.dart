@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/date_utils.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../core/study_widgets.dart';
@@ -80,10 +81,13 @@ class DigestScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                 ],
               ],
-              FilledButton.icon(
-                onPressed: () => _startDigestQuiz(context),
-                icon: const Icon(Icons.quiz_outlined),
-                label: const Text('খবরের কুইজ দাও'),
+              PookiePressable(
+                onTap: () => _startDigestQuiz(context),
+                child: FilledButton.icon(
+                  onPressed: () => _startDigestQuiz(context),
+                  icon: const Icon(Icons.quiz_outlined),
+                  label: const Text('খবরের কুইজ দাও'),
+                ),
               ),
             ],
           ),

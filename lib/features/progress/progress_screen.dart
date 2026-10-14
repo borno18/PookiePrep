@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/bn.dart';
 import '../../core/date_utils.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../core/study_widgets.dart';
@@ -55,7 +56,7 @@ class ProgressScreen extends StatelessWidget {
                 color: PookieColors.ok,
                 pose: history.isEmpty
                     ? MascotPose.encourage
-                    : MascotPose.cheering,
+                    : poseForScore(overallAccuracy),
               ),
               const SizedBox(height: 24),
               if (history.isEmpty) ...[
@@ -147,7 +148,7 @@ class ProgressScreen extends StatelessWidget {
                               Semantics(
                                 label:
                                     '${getTopicLabel(slug)} নির্ভুলতা ${toBn((topicAcc[slug] ?? 0).round())} শতাংশ',
-                                child: LinearProgressIndicator(
+                                child: AnimatedProgressBar(
                                   value:
                                       ((topicAcc[slug] ?? 0) / 100).clamp(0, 1),
                                   minHeight: 8,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/bn.dart';
 import '../../core/date_utils.dart';
+import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../data/models/question.dart';
@@ -379,6 +381,21 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  /// Live mascot pose for the quiz: reacts to progress + time urgency
+  MascotPose get _quizMascotPose {
+    if (_submitted) return MascotPose.dancing;
+    final isUrgent = _secondsRemaining <= 60;
+    if (isUrgent) return MascotPose.crying;
+    final answered = _chosenAnswers.where((a) => a != null).length;
+    final total = widget.questions.length;
+    final fraction = answered / total;
+    if (fraction == 0) return MascotPose.thinking;
+    if (fraction < 0.3) return MascotPose.encourage;
+    if (fraction < 0.6) return MascotPose.cheering;
+    if (fraction < 1.0) return MascotPose.superHappy;
+    return MascotPose.dancing;
+  }
+
   @override
   Widget build(BuildContext context) {
     final question = widget.questions[_currentIndex];
@@ -430,39 +447,41 @@ class _QuizScreenState extends State<QuizScreen> {
               'প্রশ্ন ${toBn(_currentIndex + 1)} / ${toBn(widget.questions.length)}',
               style: Theme.of(context).textTheme.titleMedium),
           actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 12),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              decoration: BoxDecoration(
-                  color:
-                      isUrgent ? PookieColors.primaryDeep : PookieColors.blush,
-                  borderRadius: BorderRadius.circular(16)),
-              child: Semantics(
-                  label: 'বাকি সময়',
-                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    Icon(Icons.timer_outlined,
-                        size: 18,
-                        color:
-                            isUrgent ? Colors.white : PookieColors.primaryDeep),
-                    const SizedBox(width: 6),
-                    Text(formatTime(_secondsRemaining),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: isUrgent
-                                ? Colors.white
-                                : PookieColors.primaryDeep)),
-                  ])),
+            PulsingBadge(
+              enabled: isUrgent,
+              child: Container(
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                decoration: BoxDecoration(
+                    color:
+                        isUrgent ? PookieColors.primaryDeep : PookieColors.blush,
+                    borderRadius: BorderRadius.circular(16)),
+                child: Semantics(
+                    label: 'বাকি সময়',
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      Icon(Icons.timer_outlined,
+                          size: 18,
+                          color:
+                              isUrgent ? Colors.white : PookieColors.primaryDeep),
+                      const SizedBox(width: 6),
+                      Text(formatTime(_secondsRemaining),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: isUrgent
+                                  ? Colors.white
+                                  : PookieColors.primaryDeep)),
+                    ])),
+              ),
             ),
           ],
         ),
         body: Column(
           children: [
-            // Linear Progress Bar
-            LinearProgressIndicator(
+            // Smooth Animated Progress Bar
+            AnimatedProgressBar(
               value: (_currentIndex + 1) / widget.questions.length,
               backgroundColor: PookieColors.blush,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(PookieColors.primaryDeep),
+              color: PookieColors.primaryDeep,
               minHeight: 4,
             ),
             Expanded(
@@ -569,6 +588,17 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               child: Row(
                 children: [
+                  // Live mascot in quiz bar
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: LiveMascot(
+                      pose: _quizMascotPose,
+                      size: 48,
+                      interactive: true,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
                   // Palette button
                   IconButton.filledTonal(
                     icon: const Icon(Icons.grid_view_rounded),
@@ -591,30 +621,36 @@ class _QuizScreenState extends State<QuizScreen> {
                   const Spacer(),
                   // Next or Submit button
                   if (!isLast)
-                    FilledButton(
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(110, 48),
-                        backgroundColor: PookieColors.primaryDeep,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                    PookiePressable(
+                      onTap: _nextQuestion,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size(110, 48),
+                          backgroundColor: PookieColors.primaryDeep,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                        ),
+                        onPressed: _nextQuestion,
+                        child: const Text('পরবর্তী',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
-                      onPressed: _nextQuestion,
-                      child: const Text('পরবর্তী',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
                     )
                   else
-                    FilledButton(
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(125, 48),
-                        backgroundColor: PookieColors.primaryDeep,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                    PookiePressable(
+                      onTap: _confirmSubmit,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size(125, 48),
+                          backgroundColor: PookieColors.primaryDeep,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                        ),
+                        onPressed: _confirmSubmit,
+                        child: const Text('জমা দাও',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
-                      onPressed: _confirmSubmit,
-                      child: const Text('জমা দাও',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                 ],
               ),
@@ -636,12 +672,19 @@ class _OptionCard extends StatelessWidget {
   final String text;
   final bool isSelected;
   final VoidCallback onTap;
+
   @override
-  Widget build(BuildContext context) => Semantics(
-        button: true,
-        selected: isSelected,
+  Widget build(BuildContext context) {
+    final disabled = MediaQuery.disableAnimationsOf(context);
+    return Semantics(
+      button: true,
+      selected: isSelected,
+      child: PookiePressable(
+        onTap: onTap,
+        pressedScale: 0.98,
+        borderRadius: BorderRadius.circular(16),
         child: AnimatedContainer(
-          duration: MediaQuery.disableAnimationsOf(context)
+          duration: disabled
               ? Duration.zero
               : const Duration(milliseconds: 180),
           curve: Curves.easeOutCubic,
@@ -663,22 +706,29 @@ class _OptionCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(children: [
-                    Container(
-                      width: 34,
-                      height: 34,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: isSelected
-                              ? PookieColors.primaryDeep
-                              : PookieColors.blush,
-                          borderRadius: BorderRadius.circular(11)),
-                      child: Text(prefix,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: isSelected
-                                  ? Colors.white
-                                  : PookieColors.ink)),
+                    AnimatedScale(
+                      scale: isSelected ? 1.08 : 1.0,
+                      duration: disabled
+                          ? Duration.zero
+                          : const Duration(milliseconds: 200),
+                      curve: Curves.easeOutBack,
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: isSelected
+                                ? PookieColors.primaryDeep
+                                : PookieColors.blush,
+                            borderRadius: BorderRadius.circular(11)),
+                        child: Text(prefix,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: isSelected
+                                    ? Colors.white
+                                    : PookieColors.ink)),
+                      ),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
@@ -689,14 +739,23 @@ class _OptionCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500))),
                     if (isSelected) ...[
                       const SizedBox(width: 8),
-                      const Icon(Icons.check_circle_rounded,
-                          color: PookieColors.primaryDeep, size: 22)
+                      AnimatedScale(
+                        scale: 1.0,
+                        duration: disabled
+                            ? Duration.zero
+                            : const Duration(milliseconds: 200),
+                        curve: Curves.easeOutBack,
+                        child: const Icon(Icons.check_circle_rounded,
+                            color: PookieColors.primaryDeep, size: 22),
+                      ),
                     ],
                   ]),
                 )),
           ),
         ),
-      );
+      ),
+    );
+  }
 }
 
 class _LegendItem extends StatelessWidget {

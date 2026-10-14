@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/bn.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../core/study_widgets.dart';
@@ -71,12 +72,15 @@ class _MistakesScreenState extends State<MistakesScreen> {
                   pose: MascotPose.encourage,
                 ),
                 const SizedBox(height: 20),
-                FilledButton.icon(
-                  onPressed: questions.isEmpty
-                      ? null
-                      : () => _startMistakesQuiz(questions),
-                  icon: const Icon(Icons.replay_rounded),
-                  label: const Text('ভুলগুলো আবার করি'),
+                PookiePressable(
+                  onTap: questions.isEmpty ? null : () => _startMistakesQuiz(questions),
+                  child: FilledButton.icon(
+                    onPressed: questions.isEmpty
+                        ? null
+                        : () => _startMistakesQuiz(questions),
+                    icon: const Icon(Icons.replay_rounded),
+                    label: const Text('ভুলগুলো আবার করি'),
+                  ),
                 ),
                 const SizedBox(height: 28),
                 Text('কোন বিষয় দেখবে?',

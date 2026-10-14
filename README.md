@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/borno18/PookiePrep/releases/tag/v.1.0"><img src="https://img.shields.io/badge/Release-v1.0-FF9DBF?style=for-the-badge&logo=github&logoColor=white" alt="Release v1.0" /></a>
+  <a href="https://github.com/borno18/PookiePrep/releases/tag/v.1.1"><img src="https://img.shields.io/badge/Release-v.1.1-FF9DBF?style=for-the-badge&logo=github&logoColor=white" alt="Release v.1.1" /></a>
   <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" /></a>
   <a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" /></a>
   <a href="#"><img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Platform Android" /></a>
@@ -25,16 +25,16 @@ Install the application directly on your Android device:
 
 | Download Source | Link | Description |
 | :--- | :--- | :--- |
-| 🚀 **Direct Download (APK)** | [**Download pookie-prep-v1.0.apk**](https://github.com/borno18/PookiePrep/releases/download/v.1.0/pookie-prep-v1.0.apk) | **Fast direct download** from GitHub Releases (~51.9 MB) |
-| 📦 **Repository Mirror** | [**Browse in Repository (`apk/`)**](apk/pookie-prep-v1.0.apk) | Local APK binary tracked in repo |
-| 🏷️ **GitHub Release Page** | [**View Release v1.0 Notes**](https://github.com/borno18/PookiePrep/releases/tag/v.1.0) | Release notes, changelog & assets |
+| 🚀 **Direct Download (APK)** | [**Download pookie-prep-v1.1.apk**](https://github.com/borno18/PookiePrep/releases/download/v.1.1/pookie-prep-v1.1.apk) | **Fast direct download** from GitHub Releases (~49.7 MB) |
+| 📦 **Repository Mirror** | [**Browse in Repository (`apk/`)**](apk/pookie-prep-v1.1.apk) | Local APK binary tracked in repo |
+| 🏷️ **GitHub Release Page** | [**View Release v.1.1 Notes**](https://github.com/borno18/PookiePrep/releases/tag/v.1.1) | Release notes, changelog & assets |
 
 ### 📋 Installation Details
-* **Version:** `1.0.0` (Build `v.1.0`)
+* **Version:** `1.1.0` (Build `v.1.1`)
 * **Minimum Android Version:** Android 5.0 (Lollipop, API Level 21) or above
 * **Recommended Android Version:** Android 10+
 * **Package Name:** `com.borno.pookie_prep`
-* **SHA-256 Checksum:** `970B2A97CB143AF72D1F330B8AC768DE9AEC4BDB785E14A6559BFF3E39A06F13`
+* **SHA-256 Checksum:** `AF33EFE974DBA80082FEAC02457EEDBC13A914D333F08FC58EA780AD664F0C92`
 
 > [!TIP]
 > **Android Installation Tip:** When installing from outside Google Play Store, allow **"Install unknown apps"** in your browser or file manager settings when prompted.
@@ -89,7 +89,9 @@ Medical admission preparation in Bangladesh is notoriously high-pressure. Genera
 - **Mark for Review (🔖):** Flag uncertain questions and revisit before submitting.
 - Auto-submission on timer expiration.
 
-### 📊 3. Exam Results & Deep Review
+### 📊 3. Exam Results, Mascot Celebrations & Advisory Quotes
+- **Dramatic Mascot Reveal Overlay:** Dynamic mascot animations based on score percentage (`Dancing`, `Super Happy`, `Happy`, `Crying`, `Fainted`).
+- **Curated Bengali Advisory Quotes (পরামর্শ ও দিকনির্দেশনা):** Exam-strategy wisdom and motivational advice tailored to student performance tiers to guide next steps.
 - Comprehensive performance breakdown: Net Score, Raw Marks, Penalty Loss, Time Used, and Accuracy %.
 - Empathetic feedback tuned to performance level.
 - **Interactive Review Screen:**

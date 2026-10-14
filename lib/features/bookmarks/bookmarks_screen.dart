@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/bn.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../core/study_widgets.dart';
@@ -61,10 +62,13 @@ class BookmarksScreen extends StatelessWidget {
                   pose: MascotPose.thinking,
                 ),
                 const SizedBox(height: 20),
-                FilledButton.icon(
-                  onPressed: () => _startBookmarksQuiz(context, questions),
-                  icon: const Icon(Icons.play_arrow_rounded),
-                  label: const Text('অনুশীলন কুইজ'),
+                PookiePressable(
+                  onTap: () => _startBookmarksQuiz(context, questions),
+                  child: FilledButton.icon(
+                    onPressed: () => _startBookmarksQuiz(context, questions),
+                    icon: const Icon(Icons.play_arrow_rounded),
+                    label: const Text('অনুশীলন কুইজ'),
+                  ),
                 ),
                 const SizedBox(height: 28),
                 Text('তোমার সংরক্ষিত প্রশ্ন',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/bn.dart';
 import '../../core/theme.dart';
+import '../../core/motion.dart';
 import '../../core/page.dart';
 import '../../core/mascot.dart';
 import 'session_config.dart';
@@ -89,10 +90,13 @@ class _SessionSetupScreenState extends State<SessionSetupScreen> {
               constraints: const BoxConstraints(maxWidth: 800),
               child: SizedBox(
                   width: double.infinity,
-                  child: FilledButton.icon(
-                    icon: const Icon(Icons.play_arrow_rounded),
-                    onPressed: _start,
-                    label: const Text('অনুশীলন শুরু করো'),
+                  child: PookiePressable(
+                    onTap: _start,
+                    child: FilledButton.icon(
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      onPressed: _start,
+                      label: const Text('অনুশীলন শুরু করো'),
+                    ),
                   )),
             )),
       ),
@@ -111,7 +115,7 @@ class _SessionSetupScreenState extends State<SessionSetupScreen> {
                         style: TextStyle(color: PookieColors.muted)),
                   ])),
               const SizedBox(width: 8),
-              const PookieMascot(pose: MascotPose.thinking, size: 80),
+              const FloatingMascot(pose: MascotPose.thinking, size: 80),
             ]),
             const SizedBox(height: 24),
             _SetupSection(

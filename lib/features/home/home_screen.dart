@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../core/bn.dart';
 import '../../core/date_utils.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
+import '../../data/models/session_result.dart';
 import '../../data/repository/pookie_repository.dart';
 import '../bookmarks/bookmarks_screen.dart';
 import '../mistakes/mistakes_screen.dart';
@@ -67,6 +69,35 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Picks a mascot pose based on recent session history.
+  MascotPose _homeMascotPose(List<SessionRecord> sessionHistory) {
+    if (sessionHistory.isEmpty) return MascotPose.greeting;
+    // Use the average accuracy of the last 3 sessions
+    final recent = sessionHistory.take(3).toList();
+    final avgAcc = recent
+            .map((s) => s.accuracy)
+            .reduce((a, b) => a + b) /
+        recent.length;
+    return poseForScore(avgAcc.round());
+  }
+
+  String _homeSpeech(MascotPose pose) {
+    switch (pose) {
+      case MascotPose.dancing:
+        return '১০০%! তুমি অসাধারণ! 🎉';
+      case MascotPose.superHappy:
+        return 'দুর্দান্ত করছো! 🌟';
+      case MascotPose.happy:
+        return 'ভালো এগোচ্ছো! চালিয়ে যাও!';
+      case MascotPose.crying:
+        return 'হার মানো না! আবার চেষ্টা করো!';
+      case MascotPose.fainted:
+        return 'একটু বিশ্রাম নাও, তারপর আবার শুরু!';
+      default:
+        return 'পুকি তোমার পাশে আছে! 🐾';
+    }
+  }
+
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
         animation: repository,
@@ -75,6 +106,8 @@ class HomeScreen extends StatelessWidget {
           final mistakes = repository.getMistakeQuestions().length;
           final saved = repository.getBookmarkedQuestions().length;
           final news = repository.digestItems;
+          final history = repository.sessionHistory;
+          final mascotPose = _homeMascotPose(history);
           void open(Widget page) => Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => page));
           return PookieScaffold(
@@ -129,15 +162,23 @@ class HomeScreen extends StatelessWidget {
                                               fontSize: 16, height: 1.6)),
                                     ])),
                                 const SizedBox(width: 8),
-                                const PookieMascot(size: 108),
+                                LiveMascot(
+                                  pose: mascotPose,
+                                  size: 108,
+                                  speechBubble: history.isNotEmpty
+                                      ? _homeSpeech(mascotPose)
+                                      : null,
+                                ),
                               ]),
                           const SizedBox(height: 22),
                           SizedBox(
                               width: double.infinity,
-                              child: FilledButton.icon(
-                                  onPressed: onStartPractice,
-                                  icon: const Icon(Icons.arrow_forward_rounded),
-                                  label: const Text('অনুশীলন শুরু করো'))),
+                              child: PookiePressable(
+                                  onTap: onStartPractice,
+                                  child: FilledButton.icon(
+                                      onPressed: onStartPractice,
+                                      icon: const Icon(Icons.arrow_forward_rounded),
+                                      label: const Text('অনুশীলন শুরু করো')))),
                           const SizedBox(height: 10),
                           const Center(
                               child: Text('বিষয় বেছে নাও · নিজের গতিতে শেখো',
@@ -161,17 +202,17 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             _StudyStat(
                                 icon: Icons.local_fire_department_outlined,
-                                value: toBn(repository.currentStreak),
+                                numericValue: repository.currentStreak,
                                 label: 'দিনের স্ট্রিক',
                                 color: PookieColors.primaryDeep),
                             _StudyStat(
                                 icon: Icons.task_alt_rounded,
-                                value: toBn(repository.sessionHistory.length),
+                                numericValue: repository.sessionHistory.length,
                                 label: 'সম্পূর্ণ সেশন',
                                 color: PookieColors.ok),
                             _StudyStat(
                                 icon: Icons.bookmark_outline_rounded,
-                                value: toBn(saved),
+                                numericValue: saved,
                                 label: 'সেভ করা প্রশ্ন',
                                 color: PookieColors.accent),
                           ])),
@@ -234,7 +275,9 @@ class HomeScreen extends StatelessWidget {
                           child: const Text('সবগুলো দেখো'))
                     ]),
                     const SizedBox(height: 8),
-                    Material(
+                    PookiePressable(
+                      onTap: () => open(DigestScreen(repository: repository)),
+                      child: Material(
                         color: PookieColors.surface,
                         borderRadius: BorderRadius.circular(16),
                         clipBehavior: Clip.antiAlias,
@@ -280,7 +323,9 @@ class HomeScreen extends StatelessWidget {
                                             size: 18,
                                             color: PookieColors.primaryDeep)
                                       ]),
-                                    ])))),
+                                    ]))),
+                      ),
+                    ),
                   ],
                   if (repository.sessionHistory.isNotEmpty) ...[
                     const SizedBox(height: 28),
@@ -346,11 +391,12 @@ class HomeScreen extends StatelessWidget {
 class _StudyStat extends StatelessWidget {
   const _StudyStat(
       {required this.icon,
-      required this.value,
+      required this.numericValue,
       required this.label,
       required this.color});
   final IconData icon;
-  final String value, label;
+  final int numericValue;
+  final String label;
   final Color color;
   @override
   Widget build(BuildContext context) =>
@@ -358,12 +404,14 @@ class _StudyStat extends StatelessWidget {
         Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(icon, size: 19, color: color),
           const SizedBox(width: 6),
-          Text(value,
-              style: TextStyle(
-                  fontSize: 22,
-                  height: 1.2,
-                  fontWeight: FontWeight.w600,
-                  color: color))
+          AnimatedCountUpText(
+            endValue: numericValue,
+            style: TextStyle(
+                fontSize: 22,
+                height: 1.2,
+                fontWeight: FontWeight.w600,
+                color: color),
+          ),
         ]),
         const SizedBox(height: 6),
         Text(label,
@@ -384,32 +432,35 @@ class _StudyLink extends StatelessWidget {
   final Color color, fill;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) => Material(
-      color: fill,
-      borderRadius: BorderRadius.circular(16),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-          onTap: onTap,
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
-              child: Row(children: [
-                Icon(icon, color: color, size: 26),
-                const SizedBox(width: 16),
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Text(title,
-                          style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 4),
-                      Text(subtitle,
-                          style: const TextStyle(
-                              fontSize: 13,
-                              color: PookieColors.muted,
-                              height: 1.5)),
-                    ])),
-                const SizedBox(width: 8),
-                Icon(Icons.arrow_forward_rounded, size: 19, color: color),
-              ]))));
+  Widget build(BuildContext context) => PookiePressable(
+      onTap: onTap,
+      child: Material(
+          color: fill,
+          borderRadius: BorderRadius.circular(16),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+              onTap: onTap,
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+                  child: Row(children: [
+                    Icon(icon, color: color, size: 26),
+                    const SizedBox(width: 16),
+                    Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Text(title,
+                              style: const TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w600)),
+                          const SizedBox(height: 4),
+                          Text(subtitle,
+                              style: const TextStyle(
+                                  fontSize: 13,
+                                  color: PookieColors.muted,
+                                  height: 1.5)),
+                        ])),
+                    const SizedBox(width: 8),
+                    Icon(Icons.arrow_forward_rounded, size: 19, color: color),
+                  ])))));
 }

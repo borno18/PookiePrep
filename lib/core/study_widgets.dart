@@ -33,7 +33,7 @@ class StudyIntro extends StatelessWidget {
                     Text(title, style: Theme.of(context).textTheme.titleLarge)),
             const SizedBox(width: 12),
             if (pose != null)
-              PookieMascot(pose: pose!, size: 64)
+              LiveMascot(pose: pose!, size: 64)
             else
               Icon(icon, color: color, size: 28),
           ]),
@@ -77,7 +77,7 @@ class StudyEmptyState extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          PookieMascot(pose: pose, size: 120),
+          LiveMascot(pose: pose, size: 120),
           const SizedBox(height: 20),
           Text(title,
               textAlign: TextAlign.center,

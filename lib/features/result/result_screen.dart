@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/bn.dart';
 import '../../core/confetti.dart';
 import '../../core/mascot.dart';
+import '../../core/motion.dart';
 import '../../core/theme.dart';
 import '../../core/page.dart';
 import '../../data/models/question.dart';
@@ -12,7 +13,7 @@ import '../quiz/quiz_screen.dart';
 import '../session_setup/topics.dart';
 import 'review_screen.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends StatefulWidget {
   const ResultScreen({
     super.key,
     required this.session,
@@ -25,21 +26,37 @@ class ResultScreen extends StatelessWidget {
   final PookieRepository repository;
 
   @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  bool _showOverlay = true;
+
+  SessionRecord get session => widget.session;
+  List<Question> get questions => widget.questions;
+  PookieRepository get repository => widget.repository;
+
+  @override
   Widget build(BuildContext context) {
     final accuracyPercent = session.accuracy.round();
     final timeTakenMinutes = session.timeTaken.inMinutes;
     final timeTakenSeconds = session.timeTaken.inSeconds % 60;
 
-    MascotPose pose = MascotPose.encourage;
-    String message = 'আজকের অনুশীলন শেষ! ভুলগুলো থেকেই পরের ধাপটা শিখি।';
+    MascotPose pose = MascotPose.fainted;
+    String message = 'এবার ঠিকমতো পড়তে হবে! হার মানো না!';
 
-    if (accuracyPercent >= 80) {
-      pose = MascotPose.cheering;
+    if (accuracyPercent == 100) {
+      pose = MascotPose.dancing;
+      message = 'পারফেক্ট! তুমি একটা সুপারস্টার!';
+    } else if (accuracyPercent >= 80) {
+      pose = MascotPose.superHappy;
       message = 'অসাধারণ ফলাফল! তুমি তো তুখোড় প্রস্তুতি নিচ্ছো!';
-    } else if (accuracyPercent >= 50) {
-      pose = MascotPose.greeting;
-      message =
-          'দারুণ প্রচেষ্টা! এবার ব্যাখ্যাগুলো দেখে প্রস্তুতি আরও গুছিয়ে নিই।';
+    } else if (accuracyPercent >= 60) {
+      pose = MascotPose.happy;
+      message = 'দারুণ প্রচেষ্টা! এবার ব্যাখ্যাগুলো দেখে আরও গুছিয়ে নিই।';
+    } else if (accuracyPercent >= 30) {
+      pose = MascotPose.crying;
+      message = 'মন খারাপ করো না! ভুলগুলো থেকেই পরের ধাপটা শিখি।';
     }
 
     // Wrong questions list for retry
@@ -93,7 +110,7 @@ class ResultScreen extends StatelessWidget {
                     Text(message),
                   ])),
               const SizedBox(width: 8),
-              PookieMascot(pose: pose, size: 84),
+              LiveMascot(pose: pose, size: 84),
             ]),
           ),
           const SizedBox(height: 24),
@@ -110,11 +127,13 @@ class ResultScreen extends StatelessWidget {
               Text('তোমার অর্জিত নম্বর',
                   style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 8),
-              Text(
-                  '${formatScore(session.score)} / ${toBn(session.plannedCount)}',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: PookieColors.primaryDeep,
-                      fontWeight: FontWeight.w700)),
+              AnimatedCountUpScore(
+                score: session.score,
+                total: session.plannedCount,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    color: PookieColors.primaryDeep,
+                    fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 16),
               const Divider(),
               const SizedBox(height: 16),
@@ -144,10 +163,14 @@ class ResultScreen extends StatelessWidget {
                   style: const TextStyle(color: PookieColors.wrong)),
               const SizedBox(height: 16),
               Wrap(spacing: 16, runSpacing: 8, children: [
-                Text('নির্ভুলতা: ${toBn(accuracyPercent)}%',
-                    style: const TextStyle(
-                        color: PookieColors.primaryDeep,
-                        fontWeight: FontWeight.w600)),
+                AnimatedCountUpText(
+                  endValue: accuracyPercent,
+                  prefix: 'নির্ভুলতা: ',
+                  suffix: '%',
+                  style: const TextStyle(
+                      color: PookieColors.primaryDeep,
+                      fontWeight: FontWeight.w600),
+                ),
                 Text(
                     'সময়: ${toBn(timeTakenMinutes)} মিনিট ${toBn(timeTakenSeconds)} সেকেন্ড',
                     style: const TextStyle(color: PookieColors.muted)),
@@ -200,16 +223,12 @@ class ResultScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 5),
-                        ClipRRect(
+                        AnimatedProgressBar(
+                          value: (topicCorrects[entry.key] ?? 0) / entry.value,
+                          backgroundColor: PookieColors.blush,
+                          color: PookieColors.primaryDeep,
+                          minHeight: 6,
                           borderRadius: BorderRadius.circular(6),
-                          child: LinearProgressIndicator(
-                            value:
-                                (topicCorrects[entry.key] ?? 0) / entry.value,
-                            backgroundColor: PookieColors.blush,
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                                PookieColors.primaryDeep),
-                            minHeight: 6,
-                          ),
                         ),
                       ],
                     ),
@@ -222,14 +241,8 @@ class ResultScreen extends StatelessWidget {
           Text('এবার কী শিখবো?', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 12),
           if (wrongQuestions.isNotEmpty) ...[
-            FilledButton.icon(
-              icon: const Icon(Icons.refresh_rounded, size: 22),
-              style: FilledButton.styleFrom(
-                backgroundColor: PookieColors.primaryDeep,
-                foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(52),
-              ),
-              onPressed: () {
+            PookiePressable(
+              onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => QuizScreen(
@@ -243,18 +256,34 @@ class ResultScreen extends StatelessWidget {
                   ),
                 );
               },
-              label: Text('আবার করি (${toBn(wrongQuestions.length)} টি)'),
+              child: FilledButton.icon(
+                icon: const Icon(Icons.refresh_rounded, size: 22),
+                style: FilledButton.styleFrom(
+                  backgroundColor: PookieColors.primaryDeep,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size.fromHeight(52),
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => QuizScreen(
+                        questions: wrongQuestions,
+                        plannedMinutes:
+                            (wrongQuestions.length * 0.75).ceil().clamp(5, 20),
+                        topicSlugs:
+                            wrongQuestions.map((q) => q.topic).toSet().toList(),
+                        repository: repository,
+                      ),
+                    ),
+                  );
+                },
+                label: Text('আবার করি (${toBn(wrongQuestions.length)} টি)'),
+              ),
             ),
             const SizedBox(height: 12),
           ],
-          FilledButton.icon(
-            icon: const Icon(Icons.checklist_rounded, size: 22),
-            style: FilledButton.styleFrom(
-              backgroundColor: PookieColors.blush,
-              foregroundColor: PookieColors.ink,
-              minimumSize: const Size.fromHeight(52),
-            ),
-            onPressed: () {
+          PookiePressable(
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => ReviewScreen(
@@ -265,28 +294,70 @@ class ResultScreen extends StatelessWidget {
                 ),
               );
             },
-            label: const Text('উত্তর ও ব্যাখ্যা দেখো'),
+            child: FilledButton.icon(
+              icon: const Icon(Icons.checklist_rounded, size: 22),
+              style: FilledButton.styleFrom(
+                backgroundColor: PookieColors.blush,
+                foregroundColor: PookieColors.ink,
+                minimumSize: const Size.fromHeight(52),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ReviewScreen(
+                      session: session,
+                      questions: questions,
+                      repository: repository,
+                    ),
+                  ),
+                );
+              },
+              label: const Text('উত্তর ও ব্যাখ্যা দেখো'),
+            ),
           ),
           const SizedBox(height: 12),
-          OutlinedButton.icon(
-            icon: const Icon(Icons.home_rounded, size: 20),
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size.fromHeight(50),
-              side: const BorderSide(color: PookieColors.blush, width: 2),
-            ),
-            onPressed: () =>
+          PookiePressable(
+            onTap: () =>
                 Navigator.of(context).popUntil((route) => route.isFirst),
-            label: const Text('হোমে ফিরে যাও',
-                style: TextStyle(color: PookieColors.ink)),
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.home_rounded, size: 20),
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                side: const BorderSide(color: PookieColors.blush, width: 2),
+              ),
+              onPressed: () =>
+                  Navigator.of(context).popUntil((route) => route.isFirst),
+              label: const Text('হোমে ফিরে যাও',
+                  style: TextStyle(color: PookieColors.ink)),
+            ),
           ),
         ],
       ),
     );
 
+
+    // Wrap confetti for high scorers
+    Widget page = content;
     if (accuracyPercent >= 80 && !MediaQuery.disableAnimationsOf(context)) {
-      return PookieConfetti(child: content);
+      page = PookieConfetti(child: content);
     }
-    return content;
+
+    // Show dramatic mascot overlay on first view
+    if (_showOverlay) {
+      return Stack(
+        children: [
+          page,
+          Positioned.fill(
+            child: ResultMascotOverlay(
+              scorePercent: accuracyPercent,
+              onDismiss: () => setState(() => _showOverlay = false),
+            ),
+          ),
+        ],
+      );
+    }
+
+    return page;
   }
 }
 
